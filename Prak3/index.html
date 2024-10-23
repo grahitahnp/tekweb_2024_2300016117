@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>To-Do App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 350px;
+            margin: 0 auto;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        #taskList {
+            list-style: none;
+            padding: 0;
+        }
+
+        #taskList li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            color: red;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .edit {
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>My To-Do List</h2>
+        <input type="text" id="newTask" placeholder="Add a new task...">
+        <button onclick="addTask()">Add</button>
+
+        <ul id="taskList">
+        </ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById("newTask");
+            const taskText = taskInput.value.trim();
+            if (taskText === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            const taskList = document.getElementById("taskList");
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span>${taskText}</span>
+                <span class="edit" onclick="editTask(this)">Edit</span>
+                <span class="close" onclick="deleteTask(this)">X</span>
+            `;
+            taskList.appendChild(li);
+            taskInput.value = ""; 
+        }
+
+        function deleteTask(element) {
+            const taskList = document.getElementById("taskList");
+            taskList.removeChild(element.parentElement); 
+        }
+
+        function editTask(element) {
+            const taskText = element.previousElementSibling;
+            const newTaskText = prompt("Edit your task:", taskText.textContent);
+            if (newTaskText !== null && newTaskText.trim() !== "") {
+                taskText.textContent = newTaskText.trim();
+            }
+        }
+
+        
+    </script>
+<h1 id="judul">coba diklik!</h1>
+<button id="Tombol">di sini</button>
+<button type="button" onClick="refreshPage()">Refresh</button>
+
+<button id="zoomInBtn">Perbesar Halaman</button>
+<button id="zoomOutBtn">Perkecil Halaman</button>
+<button id="darkModeToggle">On/Of darkmode</button>
+
+<h2>Background:</h2>
+<select id="colorPicker" onchange="ubah()">
+    <option value="">--Pilih Warna--</option>
+    <option value="yellow">Kuning</option>
+    <option value="red">Merah</option>
+    <option value="blue">Biru</option>
+    <option value="green">Hijau</option>
+    <option value="purple">Ungu</option>
+    <option value="black">Hitam</option>
+</select>
+
+<button class="button" id="ubahFontBtn">Ubah Font</button>
+
+<script src="scrib.js"></script>
+</body>
+
+</html>
